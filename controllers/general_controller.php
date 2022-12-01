@@ -1,12 +1,12 @@
 <?php
 //connect to the user account class
-include("products_controller.php");
+include("cart_controller.php");
 
 //sanitize data
 
-$result = product_is_finished(1);
-
-if($result){
+$result = delete_cart(1, "::1");
+print_r($result);
+if($result > 0){
     print_r($result);
     echo "this is fun";
 }else{
