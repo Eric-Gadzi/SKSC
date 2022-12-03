@@ -29,6 +29,12 @@
             return $this->db_fetch_all($sql);
         }
 
+        function select_particular_user($role){
+            $sql = "SELECT * FROM user where user_role = '$role'";
+
+            return $this->db_fetch_all($sql);
+        }
+
         function select_one_user($user_id){
             $sql = "SELECT * FROM user where `user_id` = '$user_id'";
 

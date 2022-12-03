@@ -10,12 +10,12 @@ $user_city = $_POST['user_city'];
 $user_contact = $_POST['user_contact'];
 $user_city = $_POST['user_city'];
 $user_role = 3;
-
+// str_replace(' ', '', $str)
 $root_dir = "../images/users";
 $upload_root_dir = "../images/users/";
 $file = $_FILES["user_image"];
-$file_dest = $root_dir . "/" . basename($file["name"]);
-$upload_file_dest = $upload_root_dir . basename($file["name"]);
+$file_dest = $root_dir . "/" . basename(str_replace(' ', '',$file["name"]));
+$upload_file_dest = $upload_root_dir . basename(str_replace(' ', '',$file["name"]));
 $file_type = strtolower(pathinfo($file_dest, PATHINFO_EXTENSION));
 
 $move = move_uploaded_file($file["tmp_name"], $file_dest);

@@ -20,6 +20,11 @@
         return $user->delete_user($user_id);
     }
 
+    function select_particular_user_ctr($role){
+        $user = new User;
+        return $user->select_particular_user($role);
+    }
+
     function select_all_user_ctr(){
         $user = new User;
 
