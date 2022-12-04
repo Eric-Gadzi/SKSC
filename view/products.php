@@ -1,6 +1,10 @@
 <?php 
   require_once("../functions/products_function.php");
 
+  require_once("../controllers/cart_controller.php");
+  session_start();
+  $ip_add = $_SESSION['user_ip'];
+  $countProducts = countCart($ip_add);
 
 ?>
 
@@ -39,27 +43,30 @@
   </head>
   <body>
     
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-      <div class="container">
-        <a class="navbar-brand" href="index.php">Welfare</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="oi oi-menu"></span> Menu
-        </button>
-  
-        <div class="collapse navbar-collapse" id="ftco-nav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="causes.php" class="nav-link">Causes</a></li>
-            <li class="nav-item"><a href="donate.php" class="nav-link">Donate</a></li>
-            <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
-            <li class="nav-item"><a href="gallery.php" class="nav-link">Gallery</a></li>
-            <li class="nav-item active"><a href="event.php" class="nav-link">Products</a></li>
-            <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
-          </ul>
-        </div>
+  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+      <a class="navbar-brand" href="index.php">Welfare</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="oi oi-menu"></span> Menu
+      </button>
+
+      <div class="collapse navbar-collapse" id="ftco-nav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
+          <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="causes.php" class="nav-link">Causes</a></li>
+          <li class="nav-item"><a href="donate.php" class="nav-link">Donate</a></li>
+          <!-- <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
+          <li class="nav-item"><a href="gallery.php" class="nav-link">Gallery</a></li>
+          <li class="nav-item"><a href="event.php" class="nav-link">Events</a></li>
+          <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li> -->
+          <li class="nav-item"><a href="volunteers.php" class="nav-link">Volunteers</a></li>
+          <li class="nav-item active"><a href="products.php" class="nav-link">Products</a></li>
+          <li class="nav-item"><a href="cart.php" class="nav-link">Cart <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary"><?php echo $countProducts ?></span></a></li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
     <!-- END nav -->
     
     <div class="hero-wrap" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">

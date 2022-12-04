@@ -1,3 +1,11 @@
+<?php 
+  require_once("../controllers/cart_controller.php");
+  session_start();
+  $ip_add = $_SESSION['user_ip'];
+  $countProducts = countCart($ip_add);
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,10 +52,13 @@
           <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
           <li class="nav-item"><a href="causes.php" class="nav-link">Causes</a></li>
           <li class="nav-item"><a href="donate.php" class="nav-link">Donate</a></li>
-          <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
+          <!-- <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
           <li class="nav-item"><a href="gallery.php" class="nav-link">Gallery</a></li>
           <li class="nav-item"><a href="event.php" class="nav-link">Events</a></li>
-          <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
+          <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li> -->
+          <li class="nav-item"><a href="volunteers.php" class="nav-link">Volunteers</a></li>
+          <li class="nav-item"><a href="products.php" class="nav-link">Products</a></li>
+          <li class="nav-item"><a href="cart.php" class="nav-link">Cart <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary"><?php echo $countProducts ?></span></a></li>
         </ul>
       </div>
     </div>
@@ -293,8 +304,10 @@
   </section>
 
   <section class="ftco-gallery">
+
     <div class="d-md-flex">
       <a href="images/cause-2.jpg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(images/cause-2.jpg);">
+      
         <div class="icon d-flex justify-content-center align-items-center">
           <span class="icon-search"></span>
         </div>
@@ -659,8 +672,6 @@
   </div>
 </div>
 
-
-
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
       <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
@@ -669,12 +680,6 @@
 
   <script src="https://js.paystack.co/v2/inline.js" async defer></script>
   <script>
-
-
-    
-    
-
-
 
     function payWithPaystack() {
       event.preventDefault();
