@@ -299,7 +299,7 @@ require_once("../functions/products_function.php");
                             </div>
                             <div class="mt-5"> <span class="fw-bold"></span>
                             </div>
-                            <div class="buttons d-flex flex-row mt-5 gap-3 buttons-bottom"> <button class="btn btn-outline-dark">Go Back</button> <button class="btn btn-primary">Add to Cart</button> </div>
+                            <div class="buttons d-flex flex-row mt-5 gap-3 buttons-bottom"> <button class="btn btn-outline-dark">Go Back</button> <button class="btn btn-primary" onclick="window.location.href='../actions/add_cart.php?product_id=<?php echo $_GET['product_id']; ?>'">Add to Cart</button> </div>
                            
                         </div>
                     </div>

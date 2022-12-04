@@ -3,6 +3,24 @@
     require_once("../classes/cart_class.php");
 
 
+    function increaseCartQauntity($ip_address, $p_id){
+        $cart = new Cart;
+
+        return $cart->increaseCartQauntity($ip_address, $p_id);
+    }
+
+    function reduceCartQauntity( $ip_address, $p_id){
+        $cart = new Cart;
+
+        return $cart->reduceCartQauntity( $ip_address, $p_id);
+    }
+
+    function checkProductInCart($ip_add, $p_id){
+        $cart = new Cart;
+
+        return $cart->checkProductInCart($ip_add, $p_id);
+    }
+
     function add_cart($product_id, $ip_add, $user_id, $qty){
         $cart = new Cart;
 

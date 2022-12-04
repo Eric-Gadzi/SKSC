@@ -39,7 +39,7 @@ function display_a_product($product_id, $product_image, $product_name, $product_
             </a>
             <h6 class='mb-3'>GHC $product_price.00</h6>
             
-            <a href='../actions/add_cart.php?product_id=$product_id' type='button' class='btn btn-outline-primary'><i class='bi bi-cart4'></i>Add to cart</a>
+            <a href='../actions/add_cart.php?product_id=$product_id' type='button' class='btn btn-outline-primary' onclick='add_to_cart($product_id)'><i class='bi bi-cart4'></i>Add to cart</a>
             <br>
             <br>";
   // if (isset($_SESSION['login'])) {

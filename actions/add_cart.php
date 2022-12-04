@@ -6,13 +6,22 @@
     $user_id = null;
     $product_qty = 1;
 
+    // if item exist increase quantity
+    $products = checkProductInCart($user_ip, $product_id);
+    if($products > 0){
+        increaseCartQauntity($user_ip, $product_id);
+        echo 2;
+        return;
+    }
+    
+
     $add = add_cart($product_id, $user_ip, $user_id, $product_qty);
 
     if($add){
-        echo "great";
-        header("location: ../view/products.php");
+    
+        echo 1;
     }else{
-        echo "failed";
+        echo 3;
     }
     
 ?>

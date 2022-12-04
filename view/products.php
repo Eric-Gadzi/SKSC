@@ -224,8 +224,8 @@
     <div class="modal-content">
       
       <div class="modal-body">
-        <h2 class="m-3 text-center text-success">
-            DONATION MADE SUCCESSFULLY
+        <h2 class="m-3 text-center text-dark">
+            Product Added To Cart!
 
         </h2>
       </div>
@@ -236,10 +236,66 @@
   </div>
 </div>
 
+<!-- modals -->
+<div class="modal fade" id="quantity" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <h2 class="m-3 text-center text-success">
+            Increased Product Quantity
+        </h2>
+      </div>
+      <div class="modal-footer">
+        <button type="button" href="./volunteers.php" class="btn btn-outline-primary" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="failed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+     
+      <div class="modal-body">
+        <h3>
+            FAILED
+        </h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
+  <script>
+    
+    function add_to_cart(product_id){
+      event.preventDefault();
 
+      const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+              //  alert(this.responseText);
+              
+               if(this.responseText == 1){
+                $('#success').modal('show');
+               }else if(this.responseText == 2){
+                $('#quantity').modal('show');
+               }else{
+                $('#failed').modal('show');
+               }
+                  
+            }
+            xhttp.open("GET", `../actions/add_cart.php?product_id=${product_id} ?>`);
+            xhttp.send();
+    }
+
+
+  </script>
 
   <script src="js/jquery.min.js"></script>
   <script src="js/jquery-migrate-3.0.1.min.js"></script>
