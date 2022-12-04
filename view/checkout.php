@@ -1,7 +1,5 @@
 <?php 
-    require_once("../functions/volunteer_functions.php");
-
-    $role = "3";
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -79,37 +77,6 @@
     </div>
 
 
-    <section class="ftco-section bg-light">
-        <div class="container">
-            <div class="row">
-                <?php 
-                
-                display_user($role);
-                
-                ?>
-              
-               
-                
-            </div>
-            <div class="row mt-5">
-                <div class="col text-center">
-                    <div class="block-27">
-                        <ul>
-                            <li><a href="#">&lt;</a></li>
-                            <li class="active"><span>1</span></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">&gt;</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
     <section id="donate" class="ftco-section-3 img" tabindex="1" style="background-image: url(images/bg_3.jpg);">
         <div class="overlay"></div>
         <div class="container">
@@ -118,22 +85,25 @@
                     <div class="img img-2 align-self-stretch" style="background-image: url(images/bg_4.jpg);"></div>
                 </div>
                 <div class="col-md-6 volunteer pl-md-5 ftco-animate">
-                    <h3 class="mb-3">Donate now</h3>
+                    <h3 class="mb-3">Make Payment</h3>
                     <form action="#" class="volunter-form">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Name" required>
+                            <input id="donor_name" type="text" class="form-control" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your Email" required>
+                            <input id="donor_email" type="email" class="form-control" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Amount in GHC" required>
+                            <input id="donor_contact" type="number" class="form-control" placeholder="Your Contact" required>
                         </div>
                         <div class="form-group">
-                            <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="Message"></textarea>
+                            <input id="donor_amount" type="text" class="form-control" placeholder="Amount in GHC" value="<?php echo $_SESSION['total'] ?>" readonly>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Send Message" class="btn btn-white py-3 px-5">
+                            <textarea id="donor_message" name="" id="" cols="30" rows="3" class="form-control" placeholder="Message to SKSC"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Make Payment" onclick="payWithPaystack()" class="btn btn-white py-3 px-5">
                         </div>
                     </form>
                 </div>
@@ -231,6 +201,57 @@
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
+        <script src="https://js.paystack.co/v2/inline.js" async defer></script>
+  <script>
+
+
+    
+    
+
+
+
+    function payWithPaystack() {
+      event.preventDefault();
+      let user_name = document.getElementById("donor_name").value;
+      let user_email = document.getElementById("donor_email").value;
+      let user_contact = document.getElementById("donor_contact").value;
+      let user_amount = document.getElementById("donor_amount").value;
+
+
+      let handler = PaystackPop.setup({
+        key: 'pk_test_bed9ac10a9fd731dd3af495d9160b4a59b72217a', // Replace with your public key
+        email: user_email,
+        amount: parseInt(user_amount)*100,//amount.value * 100,
+
+        callback: function(response){
+          let message = 'Payment complete! Reference: ' + response.reference;
+             
+          const xhttp = new XMLHttpRequest();
+          xhttp.open("GET", `../actions/donation.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_country=${user_country}&user_city=${user_city}&user_message=${user_message}&reference=${response.reference}`);
+          xhttp.send();
+          
+          xhttp.onreadystatechange = function() {
+            //    alert(this.responseText);
+
+            $('#exampleModalCenter').modal('hide');
+
+            $('#success').modal('show');
+            
+               
+                  
+            }
+           
+
+          // window.location.href = `../actions/donation.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_country=${user_country}&user_city=${user_city}&user_message=${user_message}&reference=${response.reference}`;
+        
+        },
+        onClose: function(){
+          $('#failed').modal('show');
+      }
+  });
+  handler.openIframe();
+    };
+  </script>
 
 
     <script src="js/jquery.min.js"></script>
