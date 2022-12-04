@@ -1,14 +1,14 @@
-<?php
-require_once("../functions/cart_functions.php");
+<?php 
+    require_once("../functions/volunteer_functions.php");
 
-
-$user_ip = $_SESSION['user_ip'];
+    $role = "3";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
+    <title>Volunteers</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -34,36 +34,11 @@ $user_ip = $_SESSION['user_ip'];
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <style>
-        body {
-            margin-top: 20px;
-            background: #eee;
-        }
-
-        .ui-w-40 {
-            width: 40px !important;
-            height: auto;
-        }
-
-        .card {
-            box-shadow: 0 1px 15px 1px rgba(52, 40, 104, .08);
-        }
-
-        .ui-product-color {
-            display: inline-block;
-            overflow: hidden;
-            margin: .144em;
-            width: .875rem;
-            height: .875rem;
-            border-radius: 10rem;
-            -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
-            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
-            vertical-align: middle;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
 </head>
+<script>
+    document.onload = document.getElementById('donate').scrollIntoView(true);
+</script>
 
 <body>
 
@@ -78,11 +53,12 @@ $user_ip = $_SESSION['user_ip'];
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="causes.php" class="nav-link">Causes</a></li>
+                    <!-- <li class="nav-item"><a href="causes.php" class="nav-link">Causes</a></li> -->
                     <li class="nav-item"><a href="donate.php" class="nav-link">Donate</a></li>
+                    <li class="nav-item active"><a href="volunteer.php" class="nav-link">Volunteers</a></li>
                     <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="gallery.php" class="nav-link">Gallery</a></li>
-                    <li class="nav-item active"><a href="event.php" class="nav-link">Events</a></li>
+                    <!-- <li class="nav-item"><a href="gallery.php" class="nav-link">Gallery</a></li> -->
+                    <li class="nav-item "><a href="event.php" class="nav-link">Events</a></li>
                     <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
                 </ul>
             </div>
@@ -90,80 +66,80 @@ $user_ip = $_SESSION['user_ip'];
     </nav>
     <!-- END nav -->
 
-    <div class="hero-wrap" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
+    <div class="hero-wrap" style="background-image: url('images/bg_6.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
                 <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                    <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Event</span></p>
-                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Events</h1>
+                    <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Donate</span></p>
+                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Donations</h1>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <section class="ftco-section">
-        <div class="container px-3 my-5 clearfix">
-            <!-- Shopping cart table -->
-            <div class="card">
-                <div class="card-header">
-                    <h2>Shopping Cart</h2>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered m-0">
-                            <thead>
-                                <tr>
-                                    <!-- Set columns width -->
-                                    <th class="text-center py-3 px-4" style="min-width: 400px;">Product Name &amp; Details</th>
-                                    <th class="text-right py-3 px-4" style="width: 100px;">Price</th>
-                                    <th class="text-center py-3 px-4" style="width: 120px;">Quantity</th>
-                                    <th class="text-center py-3 px-4" style="width: 120px;">Update</th>
-                                    <th class="text-right py-3 px-4" style="width: 100px;">Total</th>
-                                    <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                <?php
-                                $total = display();
-                                $_SESSION['total'] = $total;
-                                ?>
-
-
-                            </tbody>
-                        </table>
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row">
+                <?php 
+                
+                display_user($role);
+                
+                ?>
+              
+               
+                
+            </div>
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <div class="block-27">
+                        <ul>
+                            <li><a href="#">&lt;</a></li>
+                            <li class="active"><span>1</span></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">&gt;</a></li>
+                        </ul>
                     </div>
-                    <!-- / Shopping cart table -->
-
-                    <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
-                        <div class="mt-4">
-                            <!-- <label class="text-muted font-weight-normal">Promocode</label>
-                            <input type="text" placeholder="ABC" class="form-control"> -->
-                        </div>
-                        <div class="d-flex">
-                            <!-- <div class="text-right mt-4 mr-5">
-                                <label class="text-muted font-weight-normal m-0">Discount</label>
-                                <div class="text-large"><strong>$20</strong></div>
-                            </div> -->
-                            <div class="text-right mt-4">
-                                <label class="text-muted font-weight-normal m-0">Total price</label>
-                                <div class="text-large"><strong><h3>GHC <?php echo $total ?></h3></strong></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="float-right">
-                        <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="window.location.href='products.php'">Back to shopping</button>
-                        <button type="button" onclick="window.location.href='checkout.php'" class="btn btn-lg btn-primary mt-2">Checkout</button>
-                    </div>
-
                 </div>
             </div>
         </div>
     </section>
 
+
+    <section id="donate" class="ftco-section-3 img" tabindex="1" style="background-image: url(images/bg_3.jpg);">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row d-md-flex">
+                <div class="col-md-6 d-flex ftco-animate">
+                    <div class="img img-2 align-self-stretch" style="background-image: url(images/bg_4.jpg);"></div>
+                </div>
+                <div class="col-md-6 volunteer pl-md-5 ftco-animate">
+                    <h3 class="mb-3">Donate now</h3>
+                    <form action="#" class="volunter-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Amount in GHC" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="Message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Send Message" class="btn btn-white py-3 px-5">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer class="ftco-footer ftco-section img">
         <div class="overlay"></div>
@@ -255,35 +231,6 @@ $user_ip = $_SESSION['user_ip'];
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
-
-    <script>
-        function increase(product_id) {
-
-            event.preventDefault();
-
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload = function() {
-                //  alert(this.responseText);
-                alert("I am back")
-            }
-            xhttp.open("GET", `../actions/update_cart.php?product_id=${product_id}&increase=increase`);
-            xhttp.send();
-
-        }
-
-        function decrease(product_id){
-            event.preventDefault();
-
-            const xhttp = new XMLHttpRequest();
-            xhttp.onload = function() {
-                //  alert(this.responseText);
-                
-            }
-            xhttp.open("GET", `../actions/update_cart.php?product_id=${product_id}&decrease=decrease`);
-            xhttp.send();
-
-        }
-    </script>
 
 
     <script src="js/jquery.min.js"></script>

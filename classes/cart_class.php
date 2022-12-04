@@ -25,6 +25,20 @@
     
             return $this->db_count();
         }
+
+        function select_user_cart($ip_add){
+            $sql = "SELECT * FROM `cart` WHERE ip_add = '$ip_add' ";
+
+            return $this->db_fetch_all($sql);
+        }
+
+        function countCart($ip_add){
+            $sql = "SELECT * FROM `cart` WHERE ip_add = '$ip_add' ";
+
+            $this->db_fetch_all($sql);
+    
+            return $this->db_count();
+        }
         
         function add_cart($product_id, $ip_add, $user_id, $qty){
             $sql = "INSERT INTO `cart`(`product_id`, `ip_add`, `user_id`, `qty`) VALUES ('$product_id','$ip_add','$user_id','$qty')";

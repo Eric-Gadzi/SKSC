@@ -21,6 +21,18 @@
         return $cart->checkProductInCart($ip_add, $p_id);
     }
 
+    function countCart($ip_add){
+        $cart = new Cart;
+
+        return $cart->countCart($ip_add);
+    }
+
+    function select_user_cart($ip_add){
+        $cart = new Cart;
+
+        return $cart->select_user_cart($ip_add);
+    }
+
     function add_cart($product_id, $ip_add, $user_id, $qty){
         $cart = new Cart;
 
