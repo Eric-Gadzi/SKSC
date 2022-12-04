@@ -8,6 +8,7 @@
 
     if($result){
         echo "success";
+        header("Location: ../view/voluteers.php");
     }else{
         echo "failed";
     }

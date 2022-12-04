@@ -1,3 +1,9 @@
+<?php 
+  require_once("../functions/products_function.php");
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -48,7 +54,7 @@
             <li class="nav-item"><a href="donate.php" class="nav-link">Donate</a></li>
             <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
             <li class="nav-item"><a href="gallery.php" class="nav-link">Gallery</a></li>
-            <li class="nav-item active"><a href="event.php" class="nav-link">Events</a></li>
+            <li class="nav-item active"><a href="event.php" class="nav-link">Products</a></li>
             <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
           </ul>
         </div>
@@ -69,203 +75,22 @@
     </div>
 
     <section style="background-color: #eee;">
+    
   <div class="text-center container py-5">
-    <h4 class="mt-4 mb-5"><strong>Bestsellers</strong></h4>
+  
+  <a name="" id="" class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModalCenter" role="button">Create new product</a>
+    
+  
+  <h4 class="mt-4 mb-5"><strong>Buy The Best FromProduct Girls</strong></h4>
 
     <div class="row">
-      <div class="col-lg-4 col-md-12 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-            data-mdb-ripple-color="light">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/belt.webp"
-              class="w-100" />
-            <a href="#!">
-              <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5><span class="badge bg-primary ms-2">New</span></h5>
-                </div>
-              </div>
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-3">Product name</h5>
-            </a>
-            <a href="" class="text-reset">
-              <p>Category</p>
-            </a>
-            <h6 class="mb-3">$61.99</h6>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-            data-mdb-ripple-color="light">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(4).webp"
-              class="w-100" />
-            <a href="#!">
-              <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5><span class="badge bg-success ms-2">Eco</span></h5>
-                </div>
-              </div>
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-3">Product name</h5>
-            </a>
-            <a href="" class="text-reset">
-              <p>Category</p>
-            </a>
-            <h6 class="mb-3">$61.99</h6>
-          </div>
-        </div>
-      </div>
+      <?php 
+             display_all_product();
+      ?>
 
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/shoes%20(3).webp"
-              class="w-100" />
-            <a href="#!">
-              <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5><span class="badge bg-danger ms-2">-10%</span></h5>
-                </div>
-              </div>
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-3">Product name</h5>
-            </a>
-            <a href="" class="text-reset">
-              <p>Category</p>
-            </a>
-            <h6 class="mb-3">
-              <s>$61.99</s><strong class="ms-2 text-danger">$50.99</strong>
-            </h6>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-lg-4 col-md-12 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(23).webp"
-              class="w-100" />
-            <a href="#!">
-              <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5>
-                    <span class="badge bg-success ms-2">Eco</span><span
-                      class="badge bg-danger ms-2">-10%</span>
-                  </h5>
-                </div>
-              </div>
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-3">Product name</h5>
-            </a>
-            <a href="" class="text-reset">
-              <p>Category</p>
-            </a>
-            <h6 class="mb-3">
-              <s>$61.99</s><strong class="ms-2 text-danger">$50.99</strong>
-            </h6>
-          </div>
-        </div>
-      </div>
 
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
-            data-mdb-ripple-color="light">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/img%20(17).webp"
-              class="w-100" />
-            <a href="#!">
-              <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100"></div>
-              </div>
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-3">Product name</h5>
-            </a>
-            <a href="" class="text-reset">
-              <p>This is greatness and fun for us to be great</p>
-            </a>
-            <h6 class="mb-3">$61.99</h6>
-            
-            <a type="button" class="btn btn-outline-primary"><i class="bi bi-cart4"></i>Add to cart</a>
-            <div class='container'>
-                        <div class='row justify-content-center'>
-                            <a href='#' type='button' class='btn btn-outline-primary btn-sm' role='button'> <i class='bi bi-eye text-primary me-3'></i></a>
-                            <span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
-                            <a href='update_volunteer.php?user_name=$name&user_email=$email&user_contact=$contact&user_country=$country&user_city=$city&user_message=$message&user_id=$id' class='btn btn-outline-warning btn-sm' role='button'><i class='bi bi-pencil-square'></i></a>
-                            <span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
-                            <a href='../actions/delete_user_action.php?user_id=$id' class='btn btn-outline-danger btn-sm' role='button'><i class='bi bi-trash-fill'></i></a>
-                        </div>
-                    </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card">
-          <div class="bg-image hover-zoom ripple" data-mdb-ripple-color="light">
-            <img src="images/bg_1.jpg"
-              class="w-100" />
-            <a href="#!">
-              <div class="mask">
-                <div class="d-flex justify-content-start align-items-end h-100">
-                  <h5>
-                    <span class="badge bg-primary ms-2 text-white">New</span><span
-                      class="badge bg-success ms-2 text-white">Eco</span><span class="badge bg-danger ms-2">-10%</span>
-                  </h5>
-                </div>
-              </div>
-              <div class="hover-overlay">
-                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-              </div>
-            </a>
-          </div>
-          <div class="card-body">
-            <a href="" class="text-reset">
-              <h5 class="card-title mb-3">Product name</h5>
-            </a>
-            <a href="" class="text-reset">
-              <p>Category</p>
-            </a>
-            <h6 class="mb-3">
-              <s>$61.99</s><strong class="ms-2 text-danger">$50.99</strong>
-            </h6>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
     </section>
@@ -350,10 +175,70 @@
       </div>
     </footer>
     
-  
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body bg-primary bg-lighten-xs">
+          <h3 class="mb-2 text-white">Add New Product</h3>
+          <form action="../actions/create_product.php" method="POST" class="volunter-form" enctype="multipart/form-data">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Product Name" id="product_name" name="product_name" required>
+            </div>
+           
+            <div class="form-group">
+              <input type="number" class="form-control" placeholder="Product Price" id="product_price" name="product_price" required>
+            </div>
+
+            <div class="form-group">
+              <input type="number" class="form-control" placeholder="Product Quantity" id="product_quantity" name="product_quantity" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Product keywords" id="product_keywords" name="product_keywords" required>
+            </div>
+            <div class="form-group">
+              <label for="product_image" class="text-white">Product Image</label><br>
+              <input type="file" accept="image/*" name="product_image" id="product_image" required>
+            </div>
+            <div class="form-group">
+              <label class="text-white">Description</label>
+              <textarea cols="30" rows="3" class="form-control" id="product_description" name="product_description" placeholder="Description of the product">
+            </textarea>
+            </div>
+           
+        </div>
+        <div class="modal-footer bg-primary"> -->
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+          <button onclick="" type="submit" class="btn btn-success">Create</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+    <!-- modals -->
+    <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+        <h2 class="m-3 text-center text-success">
+            DONATION MADE SUCCESSFULLY
+
+        </h2>
+      </div>
+      <div class="modal-footer">
+        <button type="button" href="" class="btn btn-outline-primary" data-dismiss="modal" onclick="window.location.href = '#volunteer'">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
 
 
   <script src="js/jquery.min.js"></script>
