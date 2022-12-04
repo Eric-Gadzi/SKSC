@@ -10,4 +10,11 @@
    }
 
 
+   function product_payment_ctr($ip_add,$order_id, $payment_date, $amount, $currency){
+     $pay = new Payment;
+
+        return $pay->product_payment_ctr($ip_add,$order_id, $payment_date, $amount,  $currency);
+   }
+
+
 ?>

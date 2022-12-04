@@ -34,9 +34,6 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
 </head>
-<script>
-    document.onload = document.getElementById('donate').scrollIntoView(true);
-</script>
 
 <body>
 
@@ -88,16 +85,16 @@
                     <h3 class="mb-3">Make Payment</h3>
                     <form action="#" class="volunter-form">
                         <div class="form-group">
-                            <input id="donor_name" type="text" class="form-control" placeholder="Your Name" required>
+                            <input id="donor_name" name="donor_name"  type="text" class="form-control" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                            <input id="donor_email" type="email" class="form-control" placeholder="Your Email" required>
+                            <input id="donor_email" name="donor_email" type="email" class="form-control" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                            <input id="donor_contact" type="number" class="form-control" placeholder="Your Contact" required>
+                            <input id="donor_contact" name="donor_contact" type="number" class="form-control" placeholder="Your Contact" required>
                         </div>
                         <div class="form-group">
-                            <input id="donor_amount" type="text" class="form-control" placeholder="Amount in GHC" value="<?php echo $_SESSION['total'] ?>" readonly>
+                            <input id="donor_amount" name="donor_amount" type="text" class="form-control" placeholder="Amount in GHC" value="<?php echo $_SESSION['total'] ?>" readonly>
                         </div>
                         <div class="form-group">
                             <textarea id="donor_message" name="" id="" cols="30" rows="3" class="form-control" placeholder="Message to SKSC"></textarea>
@@ -216,6 +213,7 @@
       let user_email = document.getElementById("donor_email").value;
       let user_contact = document.getElementById("donor_contact").value;
       let user_amount = document.getElementById("donor_amount").value;
+      let user_message = document.getElementById("donor_message").value;
 
 
       let handler = PaystackPop.setup({
@@ -225,19 +223,19 @@
 
         callback: function(response){
           let message = 'Payment complete! Reference: ' + response.reference;
-             
+          alert(message); 
           const xhttp = new XMLHttpRequest();
-          xhttp.open("GET", `../actions/donation.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_country=${user_country}&user_city=${user_city}&user_message=${user_message}&reference=${response.reference}`);
-          xhttp.send();
-          
-          xhttp.onreadystatechange = function() {
-            //    alert(this.responseText);
+          xhttp.open("GET", `../actions/payment_process.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_message=${user_message}&reference=${response.reference}`);
+        //   xhttp.send();
+        //   window.location.href = `../actions/payment_process.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_country`;
+          xhttp.onload = function() {
+               alert(this.responseText);
 
-            $('#exampleModalCenter').modal('hide');
+            // $('#exampleModalCenter').modal('hide');
 
-            $('#success').modal('show');
+            // $('#success').modal('show');
             
-               
+            window.location.href = `../actions/payment_process.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_country=${user_country}&user_city=${user_city}&user_message=${user_message}&reference=${response.reference}`;
                   
             }
            

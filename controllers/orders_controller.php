@@ -1,11 +1,11 @@
 <?php 
     require_once("../classes/orders_class.php");
 
-    function create_order_ctr($user_id, $invoice_no, $order_date, $order_status){
+    function create_order_ctr($user_ip, $invoice_no, $order_date, $order_status){
         
         $order = new Order;
 
-        $order->create_order($user_id, $invoice_no, $order_date, $order_status);
+        $order->create_order($user_ip, $invoice_no, $order_date, $order_status);
 
     }
 

@@ -4,8 +4,8 @@
 
     class Order extends db_connection{
 
-        function create_order($user_id, $invoice_no, $order_date, $order_status){
-            $sql = "INSERT INTO `orders`( `user_id`, `invoice_no`, `order_date`, `order_status`) VALUES ('$user_id','$invoice_no','$order_date','$order_status')";
+        function create_order($user_ip, $invoice_no, $order_date, $order_status){
+            $sql = "INSERT INTO `orders`( `user_ip`, `invoice_no`, `order_date`, `order_status`) VALUES ('$user_ip','$invoice_no','$order_date','$order_status')";
             $result = $this->db_query($sql);
 
             $id = mysqli_insert_id($this->db);
