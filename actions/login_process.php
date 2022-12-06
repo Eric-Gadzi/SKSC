@@ -18,6 +18,7 @@
                 $_SESSION['isAdmin'] = true;
                 $_SESSION['admin_email'] = $email;
                 header("location: ../view/index.php");
+                
             }
         }
     }else{

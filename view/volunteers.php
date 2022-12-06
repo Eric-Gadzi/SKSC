@@ -5,7 +5,7 @@
     $ip_add = $_SESSION['user_ip'];
     $countProducts = countCart($ip_add);
    
-    $role = "3";
+    $role = 3;
 ?>
 
 <!DOCTYPE html>

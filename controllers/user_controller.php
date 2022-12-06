@@ -25,10 +25,10 @@
         return $user->select_particular_user($role);
     }
 
-    function select_all_user_ctr(){
+    function select_all_user_ctr($role){
         $user = new User;
 
-        return $user->select_all_user();
+        return $user->select_all_user($role);
     }
 
     function select_one_user_ctr($user_id){
@@ -55,6 +55,17 @@
         return $user->checkPassword($user_id, $password);
     }
 
+    function select_donor(){
+        $user = new User;
+
+        return $user->select_donor();
+    }
+
+    function delete_donor($id){
+        $user = new User;
+
+        return $user->delete_donor($id);
+    }
 
 
 ?>

@@ -84,8 +84,14 @@
     <section style="background-color: #eee;">
     
   <div class="text-center container py-5">
-  
-  <a name="" id="" class="btn btn-primary" href="#" data-toggle="modal" data-target="#exampleModalCenter" role="button">Create new product</a>
+  <?php 
+    if (isset($_SESSION['isAdmin'])) {
+      echo "
+      <a name='' id='' class='btn btn-primary' href='#' data-toggle='modal' data-target='#exampleModalCenter' role='button'>Create new product</a>
+      ";
+    }
+  ?>
+
     
   
   <h4 class="mt-4 mb-5"><strong>Buy The Best FromProduct Girls</strong></h4>

@@ -42,7 +42,7 @@ function display_a_product($product_id, $product_image, $product_name, $product_
             <a href='../actions/add_cart.php?product_id=$product_id' type='button' class='btn btn-outline-primary' onclick='add_to_cart($product_id)'><i class='bi bi-cart4'></i>Add to cart</a>
             <br>
             <br>";
-  // if (isset($_SESSION['login'])) {
+  if (isset($_SESSION['isAdmin'])) {
     echo "
               <div class='container '>
               <div class='row justify-content-center'>
@@ -54,7 +54,7 @@ function display_a_product($product_id, $product_image, $product_name, $product_
               </div>
           </div>
               ";
-  // }
+  }
   echo "
           </div>
         </div>

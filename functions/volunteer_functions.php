@@ -26,7 +26,9 @@
                
                         <p>
                            $message
-                        </p>
+                        </p>";
+            if (isset($_SESSION['isAdmin'])) {
+                    echo "
                                          
                     <div class='container'>
                         <div class='row'>
@@ -38,6 +40,9 @@
                             <a href='../actions/delete_user_action.php?user_id=$id' class='btn btn-outline-danger btn-sm' role='button'><i class='bi bi-trash-fill'></i></a>
                         </div>
                     </div>
+                    ";
+            }
+                    echo "
                 </div>
             </div>
         </div>

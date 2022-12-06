@@ -42,7 +42,7 @@ if ($err) {
     $currency = $res['data']['currency'];
     $payment_date = date("Y-m-d");
 
-    $donated = make_donation_ctr($user_name, $user_email, $payment_date, $amount, $data, $currency);
+    $donated = make_donation_ctr($user_name, $user_email, $payment_date, $amount, $data, $currency, $user_message, $user_contact);
 
     if($donated){
         echo 1;

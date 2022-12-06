@@ -23,8 +23,8 @@
         }
 
 
-        function select_all_user(){
-            $sql = "SELECT * FROM user";
+        function select_all_user($role){
+            $sql = "SELECT * FROM user where user_role = '$role'" ;
 
             return $this->db_fetch_all($sql);
         }
@@ -57,6 +57,18 @@
             $sql = "SELECT `user_id`, `password` FROM `admin` WHERE user_id = '$user_id' and password = '$password'";
 
             return $this->db_fetch_one($sql);
+        }
+
+        function select_donor(){
+            $sql = "SELECT * FROM `donation`";
+
+            return $this->db_fetch_all($sql);
+        }
+
+        function delete_donor($id){
+            $sql = "DELETE FROM `donation` WHERE donation_id = $id";
+
+            return $this->db_query($sql);
         }
 
 
