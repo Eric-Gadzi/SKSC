@@ -1,8 +1,8 @@
-<?php 
-  require_once("../controllers/cart_controller.php");
-  session_start();
-  $ip_add = $_SESSION['user_ip'];
-  $countProducts = countCart($ip_add);
+<?php
+require_once("../controllers/cart_controller.php");
+session_start();
+$ip_add = $_SESSION['user_ip'];
+$countProducts = countCart($ip_add);
 
 
 ?>
@@ -35,6 +35,8 @@
   <link rel="stylesheet" href="css/flaticon.css">
   <link rel="stylesheet" href="css/icomoon.css">
   <link rel="stylesheet" href="css/style.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+
 </head>
 
 <body>
@@ -59,6 +61,12 @@
           <li class="nav-item"><a href="volunteers.php" class="nav-link">Volunteers</a></li>
           <li class="nav-item"><a href="products.php" class="nav-link">Products</a></li>
           <li class="nav-item"><a href="cart.php" class="nav-link">Cart <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary"><?php echo $countProducts ?></span></a></li>
+          <li class="nav-item"><a type="button" href="#" data-toggle="modal" data-target="#modalLogin" class="nav-link btn btn-sm-primary">Admin</a></li>
+          <?php 
+            if(isset($_SESSION['isAdmin'])){
+              echo "<li class='nav-item'><a type='button' href='../settings/session_destroy.php' class='nav-link btn btn-primary'>Logout</a></li>";
+            }
+          ?>
         </ul>
       </div>
     </div>
@@ -307,7 +315,7 @@
 
     <div class="d-md-flex">
       <a href="images/cause-2.jpg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(images/cause-2.jpg);">
-      
+
         <div class="icon d-flex justify-content-center align-items-center">
           <span class="icon-search"></span>
         </div>
@@ -638,39 +646,76 @@
   </div>
 
   <!-- modals -->
+
+  <div class="modal fade" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title w-100 font-weight-bold">Sign in</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form method="POST" action="../actions/login_process.php">
+        <div class="modal-body mx-3">
+          <div class="md-form mb-5">
+            <i class="fas fa-envelope prefix grey-text"></i>
+           
+              <input type="email" name="email" id="defaultForm-email" class="form-control validate" required>
+              <label data-error="wrong" data-success="right" for="defaultForm-email" >Your email</label>
+          </div>
+
+          <div class="md-form mb-4">
+            <i class="fas fa-lock prefix grey-text" style="display: inline;"></i>
+            <input type="password" name="password" id="defaultForm-pass" class="form-control validate" required>
+            <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+          </div>
+
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+        </form>
+        
+
+      </div>
+    </div>
+  </div>
+
+
   <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      
-      <div class="modal-body">
-        <h2 class="m-3 text-center text-success">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <h2 class="m-3 text-center text-success">
             DONATION MADE SUCCESSFULLY
 
-        </h2>
-      </div>
-      <div class="modal-footer">
-        <button type="button" href="" class="btn btn-outline-primary" data-dismiss="modal" onclick="window.location.href = '#volunteer'">Ok</button>
+          </h2>
+        </div>
+        <div class="modal-footer">
+          <button type="button" href="" class="btn btn-outline-primary" data-dismiss="modal" onclick="window.location.href = '#volunteer'">Ok</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="modal fade" id="failed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-     
-      <div class="modal-body">
-        <h3>
+  <div class="modal fade" id="failed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          <h3>
             PROBLEM WITH PROCESSING DONATION
-        </h3>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+          </h3>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <!-- loader -->
   <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
@@ -680,7 +725,6 @@
 
   <script src="https://js.paystack.co/v2/inline.js" async defer></script>
   <script>
-
     function payWithPaystack() {
       event.preventDefault();
       let user_name = document.getElementById("donor_name").value;
@@ -692,35 +736,35 @@
       let handler = PaystackPop.setup({
         key: 'pk_test_bed9ac10a9fd731dd3af495d9160b4a59b72217a', // Replace with your public key
         email: user_email,
-        amount: user_amount*100,//amount.value * 100,
+        amount: user_amount * 100, //amount.value * 100,
 
-        callback: function(response){
+        callback: function(response) {
           let message = 'Payment complete! Reference: ' + response.reference;
-             
+
           const xhttp = new XMLHttpRequest();
           xhttp.open("GET", `../actions/donation.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_country=${user_country}&user_city=${user_city}&user_message=${user_message}&reference=${response.reference}`);
           xhttp.send();
-          
+
           xhttp.onreadystatechange = function() {
             //    alert(this.responseText);
 
             $('#exampleModalCenter').modal('hide');
 
             $('#success').modal('show');
-            
-               
-                  
-            }
-           
+
+
+
+          }
+
 
           // window.location.href = `../actions/donation.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_country=${user_country}&user_city=${user_city}&user_message=${user_message}&reference=${response.reference}`;
-        
+
         },
-        onClose: function(){
+        onClose: function() {
           $('#failed').modal('show');
-      }
-  });
-  handler.openIframe();
+        }
+      });
+      handler.openIframe();
     };
   </script>
 

@@ -37,12 +37,23 @@
         return $user->select_one_user($user_id);
     }
 
+    function select_one_userEmail($user_email){
+        $user = new User;
+
+        return $user->select_one_userEmail($user_email);
+    }
+
     function count_users($user_role){
         $user = new User;
 
         return $user->count_users($user_role);
     }
 
+    function checkPassword($user_id, $password){
+        $user = new User;
+
+        return $user->checkPassword($user_id, $password);
+    }
 
 
 

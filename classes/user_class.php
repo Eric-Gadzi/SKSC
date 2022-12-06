@@ -41,10 +41,22 @@
             return $this->db_fetch_one($sql);
         }
 
+        function select_one_userEmail($user_email){
+            $sql = "SELECT * FROM user where `user_email` = '$user_email'";
+
+            return $this->db_fetch_one($sql);
+        }
+
         function count_users($user_role){
             $sql = "SELECT * FROM user where user_role = $user_role";
             $this->db_fetch_all($sql);
             return $this->db_count();
+        }
+
+        function  checkPassword($user_id, $password){
+            $sql = "SELECT `user_id`, `password` FROM `admin` WHERE user_id = '$user_id' and password = '$password'";
+
+            return $this->db_fetch_one($sql);
         }
 
 
