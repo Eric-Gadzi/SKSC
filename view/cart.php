@@ -39,7 +39,7 @@ require_once("../controllers/cart_controller.php");
 
     <style>
         body {
-            margin-top: 20px;
+            /* margin-top: 20px; */
             background: #eee;
         }
 
@@ -99,11 +99,13 @@ require_once("../controllers/cart_controller.php");
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
                 <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                    <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Event</span></p>
-                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Events</h1>
+                    <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.php">Home</a></span> <span>Event</span></p>
+                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">YOUR CART</h1>
+                    
                 </div>
             </div>
         </div>
+        
     </div>
 
 
@@ -160,7 +162,13 @@ require_once("../controllers/cart_controller.php");
 
                     <div class="float-right">
                         <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="window.location.href='products.php'">Back to shopping</button>
-                        <button type="button" onclick="window.location.href='checkout.php'" class="btn btn-lg btn-primary mt-2">Checkout</button>
+                        <?php 
+                            if($_SESSION['total'] < 1){
+                                echo "<button type='button' onclick='window.location.href='checkout.php' class='btn btn-lg btn-primary mt-2' disabled>Checkout</button>";
+                            }else{
+                                echo "<button type='button' onclick='window.location.href='checkout.php' class='btn btn-lg btn-primary mt-2'/>Checkout</button>";
+                            }
+                        ?>
                     </div>
 
                 </div>

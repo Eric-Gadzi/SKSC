@@ -1,7 +1,7 @@
 <?php 
-
 require_once("../controllers/payment_controller.php");
 require_once("../controllers/orders_controller.php");
+require_once("../controllers/cart_controller.php");
 session_start();
 $curl = curl_init();
 // $data = "T032500960937628";
@@ -11,8 +11,12 @@ $user_email = $_GET['user_email'];
 $user_message = $_GET['user_message'];
 $user_contact = $_GET['user_contact'];
 $data = $_GET["reference"];
-$user_ip = $_GET['user_ip'];
-$order_id = create_order_ctr($user_ip, $invoice_no, $order_date, $order_status);
+$user_ip = $_SESSION['user_ip'];
+$invoice_no = mt_rand();
+$order_status = "pending";
+$order_date = new DateTime();
+$order_date = date_format($order_date, "Y-m-d");
+
 
 curl_setopt_array($curl, array(
   CURLOPT_URL => 'https://api.paystack.co/transaction/verify/'.$data,
@@ -40,18 +44,31 @@ if ($err) {
     $res = $response;
 
     // print_r($res);
-
+    $order_id = create_order_ctr($user_ip, $invoice_no, $order_date, $order_status);
+   
     $amount =  $res['data']['amount'];
     $currency = $res['data']['currency'];
     $payment_date = date("Y-m-d");
+    
 
+    
     $paid = product_payment_ctr($user_ip,$order_id, $payment_date, $amount, $currency);
 
-
-
     if($paid){
+        $cartList = select_user_cart($user_ip);
+        foreach($cartList as $cart){
+          $moved = add_order_details_ctr($order_id, $cart['product_id'], $cart['qty']);
+          if($moved){
+            $deleted = delete_cart($cart['product_id'], $user_ip);
+          }else{
+            echo 2;
+            return;
+          }
+        }
         echo 1;
+        return;
     }else{
         echo 2;
+        return;
     }
 }

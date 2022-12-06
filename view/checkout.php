@@ -1,5 +1,5 @@
-<?php 
-    session_start();
+<?php
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -48,30 +48,21 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
-                    <!-- <li class="nav-item"><a href="causes.php" class="nav-link">Causes</a></li> -->
+                    <li class="nav-item"><a href="causes.php" class="nav-link">Causes</a></li>
                     <li class="nav-item"><a href="donate.php" class="nav-link">Donate</a></li>
-                    <li class="nav-item active"><a href="volunteer.php" class="nav-link">Volunteers</a></li>
-                    <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
-                    <!-- <li class="nav-item"><a href="gallery.php" class="nav-link">Gallery</a></li> -->
-                    <li class="nav-item "><a href="event.php" class="nav-link">Events</a></li>
-                    <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
+                    <!-- <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
+          <li class="nav-item"><a href="gallery.php" class="nav-link">Gallery</a></li>
+          <li class="nav-item"><a href="event.php" class="nav-link">Events</a></li>
+          <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li> -->
+                    <li class="nav-item"><a href="volunteers.php" class="nav-link">Volunteers</a></li>
+                    <li class="nav-item"><a href="products.php" class="nav-link">Products</a></li>
+                    <li class="nav-item"><a href="cart.php" class="nav-link">Cart <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary"><?php echo $countProducts ?></span></a></li>
                 </ul>
             </div>
         </div>
     </nav>
     <!-- END nav -->
 
-    <div class="hero-wrap" style="background-image: url('images/bg_6.jpg');" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
-                <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                    <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Donate</span></p>
-                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Donations</h1>
-                </div>
-            </div>
-        </div>
-    </div>
 
 
     <section id="donate" class="ftco-section-3 img" tabindex="1" style="background-image: url(images/bg_3.jpg);">
@@ -85,7 +76,7 @@
                     <h3 class="mb-3">Make Payment</h3>
                     <form action="#" class="volunter-form">
                         <div class="form-group">
-                            <input id="donor_name" name="donor_name"  type="text" class="form-control" placeholder="Your Name" required>
+                            <input id="donor_name" name="donor_name" type="text" class="form-control" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
                             <input id="donor_email" name="donor_email" type="email" class="form-control" placeholder="Your Email" required>
@@ -198,58 +189,91 @@
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
-        <script src="https://js.paystack.co/v2/inline.js" async defer></script>
-  <script>
+    <script src="https://js.paystack.co/v2/inline.js" async defer></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function payWithPaystack() {
+            event.preventDefault();
+            let user_name = document.getElementById("donor_name").value;
+            let user_email = document.getElementById("donor_email").value;
+            let user_contact = document.getElementById("donor_contact").value;
+            let user_amount = document.getElementById("donor_amount").value;
+            let user_message = document.getElementById("donor_message").value;
 
 
-    
-    
+            let handler = PaystackPop.setup({
+                key: 'pk_test_bed9ac10a9fd731dd3af495d9160b4a59b72217a', // Replace with your public key
+                email: user_email,
+                amount: parseInt(user_amount) * 100, //amount.value * 100,
+
+                callback: function(response) {
+               
+
+                    const xhttp = new XMLHttpRequest();
+
+                    xhttp.open("GET", `../actions/payment_process.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&reference=${response.reference}&user_message=${user_message}`);
+                    xhttp.send();
+                
+                    xhttp.onload = function() {
+                        
+
+                        if (this.responseText == 1) {
+                            <?php $_SESSION['total'] = 0; ?>
+                            Swal.fire({
+                                icon: 'success',
+                                text: 'Payment Successful',
+                                title: 'Thank you for making this donation.',
+                                showDenyButton: false,
+                                showCancelButton: false,
+                                confirmButtonText: 'Ok',
+                                denyButtonText: `Don't save`,
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    window.location = "index.php";
+                                } 
+                            })
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                text: 'Sorry Could not process payment',
+                                title: 'Thank you for making this donation.',
+                                showDenyButton: false,
+                                showCancelButton: false,
+                                confirmButtonText: 'Ok',
+                                denyButtonText: `Don't save`,
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    window.location = "index.php";
+                                } 
+                            })
+                        }
 
 
+                    }
 
-    function payWithPaystack() {
-      event.preventDefault();
-      let user_name = document.getElementById("donor_name").value;
-      let user_email = document.getElementById("donor_email").value;
-      let user_contact = document.getElementById("donor_contact").value;
-      let user_amount = document.getElementById("donor_amount").value;
-      let user_message = document.getElementById("donor_message").value;
-
-
-      let handler = PaystackPop.setup({
-        key: 'pk_test_bed9ac10a9fd731dd3af495d9160b4a59b72217a', // Replace with your public key
-        email: user_email,
-        amount: parseInt(user_amount)*100,//amount.value * 100,
-
-        callback: function(response){
-          let message = 'Payment complete! Reference: ' + response.reference;
-          alert(message); 
-          const xhttp = new XMLHttpRequest();
-          xhttp.open("GET", `../actions/payment_process.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_message=${user_message}&reference=${response.reference}`);
-        //   xhttp.send();
-        //   window.location.href = `../actions/payment_process.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_country`;
-          xhttp.onload = function() {
-               alert(this.responseText);
-
-            // $('#exampleModalCenter').modal('hide');
-
-            // $('#success').modal('show');
-            
-            window.location.href = `../actions/payment_process.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_country=${user_country}&user_city=${user_city}&user_message=${user_message}&reference=${response.reference}`;
-                  
-            }
-           
-
-          // window.location.href = `../actions/donation.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_country=${user_country}&user_city=${user_city}&user_message=${user_message}&reference=${response.reference}`;
-        
-        },
-        onClose: function(){
-          $('#failed').modal('show');
-      }
-  });
-  handler.openIframe();
-    };
-  </script>
+                },
+                onClose: function() {
+                    Swal.fire({
+                                icon: 'error',
+                                text: 'Sorry Could not process payment',
+                                title: 'Thank you for making this donation.',
+                                showDenyButton: false,
+                                showCancelButton: false,
+                                confirmButtonText: 'Ok',
+                                denyButtonText: `Don't save`,
+                            }).then((result) => {
+                                /* Read more about isConfirmed, isDenied below */
+                                if (result.isConfirmed) {
+                                    window.location = "index.php";
+                                } 
+                            })
+                }
+            });
+            handler.openIframe();
+        };
+    </script>
 
 
     <script src="js/jquery.min.js"></script>

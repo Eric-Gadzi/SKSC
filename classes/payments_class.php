@@ -14,7 +14,7 @@ class payment extends db_connection{
 
 
     function product_payment_ctr($ip_add,$order_id, $payment_date, $amount, $currency){
-        $sql = "INSERT INTO `payment`( `amt`, `user_ip`, `order_id`, `currency`, `payment_date`) VALUES ('$amount','$ip_add','$order_id','$currency','$payment_date'";
+        $sql = "INSERT INTO `payment`( `amt`, `user_ip`, `order_id`, `currency`, `payment_date`) VALUES ('$amount','$ip_add','$order_id','$currency','$payment_date')";
 
         return $this->db_query($sql);
 
