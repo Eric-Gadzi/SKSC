@@ -8,7 +8,7 @@ if(isset($_GET['increase'])){
     $in = increaseCartQauntity($user_ip, $product_id);
     if($in){
         echo 1;
-        header("location: ../view/cart.php");
+        header("location: ../view/cart.php#cart");
     }
 }
 
@@ -16,7 +16,7 @@ if(isset($_GET['decrease'])){
     $in = reduceCartQauntity($user_ip, $product_id);
     if($in){
         echo 1;
-        header("location: ../view/cart.php");
+        header("location: ../view/cart.php#cart");
     }else{
         echo 2;
     }

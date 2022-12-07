@@ -66,10 +66,10 @@ $countProducts = countCart($ip_add);
           <li class="nav-item"><a href="products.php" class="nav-link">Products</a></li>
           <li class="nav-item"><a href="cart.php" class="nav-link">Cart <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary"><?php echo $countProducts ?></span></a></li>
           <li class="nav-item"><a type="button" href="#" data-toggle="modal" data-target="#modalLogin" class="nav-link btn btn-sm-primary">Admin</a></li>
-          <?php 
-            if(isset($_SESSION['isAdmin'])){
-              echo "<li class='nav-item'><a type='button' href='../settings/session_destroy.php' class='nav-link btn btn-primary'>Logout</a></li>";
-            }
+          <?php
+          if (isset($_SESSION['isAdmin'])) {
+            echo "<li class='nav-item'><a type='button' href='../settings/session_destroy.php' class='nav-link btn btn-primary'>Logout</a></li>";
+          }
           ?>
         </ul>
       </div>
@@ -78,9 +78,9 @@ $countProducts = countCart($ip_add);
   <!-- END nav -->
   <?php if (isset($_GET['message'])) : ?>
 
-      <div class='alert' style="display: none;" aria-hidden="true" data-id="<?$_GET['message'];?>"></div>
+    <div class='alert' style="display: none;" aria-hidden="true" data-id="<? $_GET['message']; ?>"></div>
 
-<?php endif; ?>
+  <?php endif; ?>
 
   <div class="hero-wrap" style="background-image: url('images/bg_7.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -501,19 +501,19 @@ $countProducts = countCart($ip_add);
           <h3 class="mb-3">Be a volunteer</h3>
           <form action="../actions/add_volunteer.php" method="POST" class="volunter-form" enctype="multipart/form-data">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Your Name" id="user_name" name="user_name" required>
+              <input type="text" class="form-control" placeholder="Your Name" id="user_name" name="user_name" pattern="[A-Za-z].{1,}" title="input cannot contain numbers or special characters">
             </div>
             <div class="form-group">
-              <input type="email" class="form-control" placeholder="Your Email" id="user_email" name="user_email" required>
+              <input type="email" class="form-control" placeholder="Your Email" id="user_email" name="user_email">
             </div>
             <div class="form-group">
-              <input type="number" class="form-control" placeholder="Your Telephone" id="user_contact" name="user_contact" required>
+              <input type="number" class="form-control" placeholder="Your Telephone" id="user_contact" name="user_contact" pattern="(?=.*\d).{10,}" title="input cannot contain numbers or special characters" required>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Country" id="user_country" name="user_country" required>
+              <input type="text" class="form-control" placeholder="Country" id="user_country" name="user_country"  pattern="[A-Za-z].{1,}" title="input cannot contain numbers or special characters">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="user_city" name="user_city" placeholder="City" required>
+              <input type="text" class="form-control" id="user_city" name="user_city" placeholder="City" pattern="[A-Za-z].{1,}" title="input cannot contain numbers or special characters" required>
             </div>
             <div class="form-group">
               <label for="user_image" class="text-white">Profile Image</label><br>
@@ -666,26 +666,26 @@ $countProducts = countCart($ip_add);
           </button>
         </div>
         <form method="POST" action="../actions/login_process.php">
-        <div class="modal-body mx-3">
-          <div class="md-form mb-5">
-            <i class="fas fa-envelope prefix grey-text"></i>
-           
+          <div class="modal-body mx-3">
+            <div class="md-form mb-5">
+              <i class="fas fa-envelope prefix grey-text"></i>
+
               <input type="email" name="email" id="defaultForm-email" class="form-control validate" required>
-              <label data-error="wrong" data-success="right" for="defaultForm-email" >Your email</label>
-          </div>
+              <label data-error="wrong" data-success="right" for="defaultForm-email">Your email</label>
+            </div>
 
-          <div class="md-form mb-4">
-            <i class="fas fa-lock prefix grey-text" style="display: inline;"></i>
-            <input type="password" name="password" id="defaultForm-pass" class="form-control validate" required>
-            <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
-          </div>
+            <div class="md-form mb-4">
+              <i class="fas fa-lock prefix grey-text" style="display: inline;"></i>
+              <input type="password" name="password" id="defaultForm-pass" class="form-control validate" required>
+              <label data-error="wrong" data-success="right" for="defaultForm-pass">Your password</label>
+            </div>
 
-        </div>
-        <div class="modal-footer d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary">Login</button>
-        </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary">Login</button>
+          </div>
         </form>
-        
+
 
       </div>
     </div>
@@ -734,23 +734,75 @@ $countProducts = countCart($ip_add);
 
   <script src="https://js.paystack.co/v2/inline.js" async defer></script>
   <script>
-		const message = $(".alert").data("id")
+    const message = $(".alert").data("id")
 
-		if (message) {
-			Swal.fire({
-				icon: 'success',
-				title: 'Forms Submitted',
-				text: 'You are one step to making a change',
-			})
-		}
-		console.log(message)
-	</script>
+    if (message) {
+      Swal.fire({
+        icon: 'success',
+        title: 'Forms Submitted',
+        text: 'You are one step to making a change',
+      })
+    }
+    console.log(message)
+  </script>
   <script>
+    function validateForm() {
+      let user_name = document.getElementById("donor_name").value;
+      let user_email = document.getElementById("donor_email").value;
+      let user_contact = document.getElementById("donor_contact").value;
+      let user_amount = document.getElementById("donor_amount").value;
+      let user_message = document.getElementById("donor_message").value;
 
-    
+      var positionOfAT = user_email.indexOf("@");
+      var poisitionofDOT = user_email.lastIndexOf(".");
+
+      if (user_name == null || user_name == "") {
+        document.getElementById("name_error").innerHTML = "Name cannot be empty";
+        return false;
+      }else if(user_name == 1){
+        document.getElementById("name_error").innerHTML = "Invalid length of Name";
+        return false;
+      }
+
+
+      /**
+      * function validateform(){  
+var name=document.myform.name.value;  
+var password=document.myform.password.value;
+var num=document.myform.contact.value; 
+var x=document.myform.email.value;
+var atposition=x.indexOf("@");  
+var dotposition=x.lastIndexOf(".");    
   
-    
+if (name==null || name==""){  
+  alert("Name can't be blank");  
+  return false;  
+}
+else if(password.length<8){  
+  alert("Password must be at least 8 characters long.");  
+  return false;  
+  }  
 
+  else if(num.length<10){  
+    alert("Contact must be at least 10 characters long.");  
+    return false;  
+    }
+else if (isNaN(num)){  
+  document.getElementById("numloc").innerHTML="Enter Numeric value only";  
+  return false;  
+}
+
+else if (atposition<1 || dotposition<atposition+2 || dotposition+2>=x.length){  
+  alert("Please enter a valid e-mail address \n atpostion:"+atposition+"\n dotposition:"+dotposition);  
+  return false;  
+  }  
+
+
+else{  
+  return true;  
+  }  
+      */
+    }
 
     function payWithPaystack() {
       event.preventDefault();

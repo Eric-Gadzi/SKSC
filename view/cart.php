@@ -120,7 +120,7 @@ $countProducts = countCart($ip_add);
     </div>
 
 
-    <section class="ftco-section">
+    <section class="ftco-section" >
         <div class="container px-3 my-5 clearfix">
             <!-- Shopping cart table -->
             <div class="card">
@@ -141,7 +141,7 @@ $countProducts = countCart($ip_add);
                                     <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="cart">
 
                                 <?php
                                 $total = display();
