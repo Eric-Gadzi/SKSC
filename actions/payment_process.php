@@ -65,6 +65,7 @@ if ($err) {
             return;
           }
         }
+        $_SESSION['total'] = 0;
         echo 1;
         return;
     }else{

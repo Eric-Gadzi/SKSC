@@ -1,5 +1,9 @@
 <?php
-session_start();
+require_once("../functions/cart_functions.php");
+require_once("../controllers/cart_controller.php");
+
+  $ip_add = $_SESSION['user_ip'];
+  $countProducts = countCart($ip_add);
 ?>
 
 <!DOCTYPE html>
@@ -218,7 +222,7 @@ session_start();
                         
 
                         if (this.responseText == 1) {
-                            <?php $_SESSION['total'] = 0; ?>
+                            
                             Swal.fire({
                                 icon: 'success',
                                 text: 'Payment Successful',

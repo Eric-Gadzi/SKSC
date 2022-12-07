@@ -162,12 +162,13 @@ require_once("../controllers/cart_controller.php");
 
                     <div class="float-right">
                         <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="window.location.href='products.php'">Back to shopping</button>
-                        <?php 
-                            if($_SESSION['total'] < 1){
-                                echo "<button type='button' onclick='window.location.href='checkout.php' class='btn btn-lg btn-primary mt-2' disabled>Checkout</button>";
-                            }else{
-                                echo "<button type='button' onclick='window.location.href='checkout.php' class='btn btn-lg btn-primary mt-2'/>Checkout</button>";
-                            }
+                        <button type='button' onclick="window.location.href='checkout.php'" class='btn btn-lg btn-primary mt-2'>Checkout</button>
+                       <?php 
+                            // if($_SESSION['total'] < 1){
+                            //     echo "<button type='button' onclick='window.location.href='checkout.php' class='btn btn-lg btn-primary mt-2' disabled>Checkout</button>";
+                            // }else{
+                                // echo "<button type='button' onclick='window.location.href='checkout.php' class='btn btn-lg btn-primary mt-2'>Checkout</button>";
+                            // }
                         ?>
                     </div>
 

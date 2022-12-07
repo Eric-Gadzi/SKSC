@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 01, 2022 at 05:19 PM
+-- Generation Time: Dec 06, 2022 at 06:33 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.0
 
@@ -32,6 +32,12 @@ CREATE TABLE `admin` (
   `password` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `admin`
+--
+
+
+
 -- --------------------------------------------------------
 
 --
@@ -52,9 +58,21 @@ CREATE TABLE `cart` (
 --
 
 CREATE TABLE `donation` (
-  `payment_id` int(11) NOT NULL,
-  `payment_date` date NOT NULL
+  `donation_id` int(11) NOT NULL,
+  `donor_name` varchar(100) NOT NULL,
+  `donor_email` varchar(20) NOT NULL,
+  `donation_date` date NULL,
+  `donation_amount` double NOT NULL,
+  `reference_no` varchar(20) NOT NULL,
+  `currency` varchar(20) NOT NULL,
+  `message` varchar(150) DEFAULT NULL,
+  `donor_contact` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `donation`
+--
+
 
 -- --------------------------------------------------------
 
@@ -68,6 +86,11 @@ CREATE TABLE `orderdetails` (
   `qty` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `orderdetails`
+--
+
+
 -- --------------------------------------------------------
 
 --
@@ -76,11 +99,16 @@ CREATE TABLE `orderdetails` (
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_ip` varchar(20) NOT NULL,
   `invoice_no` int(11) NOT NULL,
   `order_date` date NOT NULL,
   `order_status` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `orders`
+--
+
 
 -- --------------------------------------------------------
 
@@ -91,11 +119,17 @@ CREATE TABLE `orders` (
 CREATE TABLE `payment` (
   `pay_id` int(11) NOT NULL,
   `amt` double NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_ip` varchar(20) NOT NULL,
   `order_id` int(11) NOT NULL,
   `currency` text NOT NULL,
   `payment_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payment`
+--
+
+
 
 -- --------------------------------------------------------
 
@@ -108,10 +142,12 @@ CREATE TABLE `products` (
   `product_title` varchar(200) NOT NULL,
   `product_price` double NOT NULL,
   `product_desc` varchar(500) DEFAULT NULL,
+  `product_qty` int(11) NOT NULL DEFAULT 1,
   `product_image` varchar(100) DEFAULT NULL,
-  `product_qty` int(11) DEFAULT 1,
   `product_keywords` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
 
 -- --------------------------------------------------------
 
@@ -130,6 +166,7 @@ CREATE TABLE `user` (
   `user_image` varchar(100) DEFAULT NULL,
   `user_role` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
 --
 -- Indexes for dumped tables
@@ -151,7 +188,7 @@ ALTER TABLE `cart`
 -- Indexes for table `donation`
 --
 ALTER TABLE `donation`
-  ADD KEY `donation_ibfk_1` (`payment_id`);
+  ADD PRIMARY KEY (`donation_id`);
 
 --
 -- Indexes for table `orderdetails`
@@ -164,8 +201,7 @@ ALTER TABLE `orderdetails`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`order_id`);
 
 --
 -- Indexes for table `payment`
@@ -189,6 +225,12 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `donation`
+--
+ALTER TABLE `donation`
+  MODIFY `donation_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -231,23 +273,11 @@ ALTER TABLE `cart`
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `donation`
---
-ALTER TABLE `donation`
-  ADD CONSTRAINT `donation_ibfk_1` FOREIGN KEY (`payment_id`) REFERENCES `payment` (`pay_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `orderdetails`
 --
 ALTER TABLE `orderdetails`
   ADD CONSTRAINT `orderdetails_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `orderdetails_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment`

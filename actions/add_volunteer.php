@@ -26,9 +26,9 @@ if ($move) {
     $result = add_user_ctr($user_name, $user_email, $user_message, $user_country, $user_city, $user_contact, $file_dest, $user_role);
 
     if($result){
-
+        header("location: ../view/index.php?message=success");
     }else{
-        
+        header("location: ../view/index.php");
     }
 }
 

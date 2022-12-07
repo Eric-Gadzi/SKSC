@@ -9,7 +9,7 @@
     // if item exist increase quantity
     $products = checkProductInCart($user_ip, $product_id);
     if($products > 0){
-        increaseCartQauntity($user_ip, $product_id);
+        //increaseCartQauntity($user_ip, $product_id);
         echo 2;
         return;
     }
@@ -18,10 +18,12 @@
     $add = add_cart($product_id, $user_ip, $user_id, $product_qty);
 
     if($add){
-    
         echo 1;
+        return;
     }else{
+        
         echo 3;
+        return;
     }
     
 ?>

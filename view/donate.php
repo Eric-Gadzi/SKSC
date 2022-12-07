@@ -99,8 +99,10 @@
         	<?php 
              display_donations();
           ?>
+          </div>
         	<div class="col-lg-4 d-flex mb-sm-4 ftco-animate">
-    
+          
+          
         <div class="row mt-5">
           <div class="col text-center">
             <div class="block-27">
@@ -116,7 +118,7 @@
             </div>
           </div>
         </div>
-      </div>
+    
     </section>
 
     <section id="donate" class="ftco-section-3 img" tabindex="1" style="background-image: url(images/bg_3.jpg);">

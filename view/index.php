@@ -36,6 +36,10 @@ $countProducts = countCart($ip_add);
   <link rel="stylesheet" href="css/icomoon.css">
   <link rel="stylesheet" href="css/style.css">
   <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 </head>
 
@@ -72,6 +76,11 @@ $countProducts = countCart($ip_add);
     </div>
   </nav>
   <!-- END nav -->
+  <?php if (isset($_GET['message'])) : ?>
+
+      <div class='alert' style="display: none;" aria-hidden="true" data-id="<?$_GET['message'];?>"></div>
+
+<?php endif; ?>
 
   <div class="hero-wrap" style="background-image: url('images/bg_7.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
@@ -515,7 +524,7 @@ $countProducts = countCart($ip_add);
             </textarea>
             </div>
             <div class="form-group">
-              <input type="submit" name="submit" value="Become A Volunteer" class="btn btn-white py-3 px-5" required>
+              <input type="submit" name="submit" onclick="addVolunteer()" value="Become A Volunteer" class="btn btn-white py-3 px-5" required>
             </div>
           </form>
         </div>
@@ -725,12 +734,31 @@ $countProducts = countCart($ip_add);
 
   <script src="https://js.paystack.co/v2/inline.js" async defer></script>
   <script>
+		const message = $(".alert").data("id")
+
+		if (message) {
+			Swal.fire({
+				icon: 'success',
+				title: 'Forms Submitted',
+				text: 'You are one step to making a change',
+			})
+		}
+		console.log(message)
+	</script>
+  <script>
+
+    
+  
+    
+
+
     function payWithPaystack() {
       event.preventDefault();
       let user_name = document.getElementById("donor_name").value;
       let user_email = document.getElementById("donor_email").value;
       let user_contact = document.getElementById("donor_contact").value;
       let user_amount = document.getElementById("donor_amount").value;
+      let user_message = document.getElementById("donor_message").value;
 
 
       let handler = PaystackPop.setup({
@@ -745,7 +773,7 @@ $countProducts = countCart($ip_add);
           xhttp.open("GET", `../actions/donation.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&user_country=${user_country}&user_city=${user_city}&user_message=${user_message}&reference=${response.reference}`);
           xhttp.send();
 
-          xhttp.onreadystatechange = function() {
+          xhttp.onload = function() {
             //    alert(this.responseText);
 
             $('#exampleModalCenter').modal('hide');
