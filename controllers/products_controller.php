@@ -25,6 +25,13 @@
         return $product->select_all_products();
     }
 
+    function select_search_products_ctr($value){
+        $product = new Product;
+
+        return $product->select_search_products($value);
+    }
+
+
     function select_one_product_ctr($product_id){
         $product = new Product;
 

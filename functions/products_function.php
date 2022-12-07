@@ -4,6 +4,13 @@ require_once("../controllers/products_controller.php");
 
 
 
+function display_all_search_product($value){
+  $product_list = select_search_products_ctr($value);
+  foreach ($product_list as $product) {
+    display_a_product($product['product_id'], $product['product_image'], $product['product_title'], $product['product_desc'], $product['product_price'], $product['product_qty'],  $product['product_keywords']);
+  }
+}
+
 
 function display_all_product()
 {

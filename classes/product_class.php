@@ -34,6 +34,11 @@
             return $this->db_fetch_all($sql);
         }
 
+        function select_search_products($value){
+            $sql = "SELECT * FROM products WHERE product_title LIKE '%$value%'";
+            return $this->db_fetch_all($sql);
+        }
+
         function select_one_product($product_id){
             $sql = "SELECT * FROM products where product_id = $product_id";
 
