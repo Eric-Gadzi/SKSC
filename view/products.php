@@ -46,7 +46,7 @@ $countProducts = countCart($ip_add);
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
-
+ 
 </head>
 
 <body>
@@ -76,10 +76,10 @@ $countProducts = countCart($ip_add);
     </div>
   </nav>
   <!-- END nav -->
-
-  <?php if (isset($_GET['message'])) : ?>
-
-    <div class='alert' style="display: none;" aria-hidden="true" data-id="<? $_GET['message']; ?>"></div>
+ 
+  <?php if (isset($_GET['status'])) : ?>
+     
+    <div class='alert' style="display: none;" aria-hidden="true" data-id="<?php echo $_GET['status']; ?>"></div>
 
   <?php endif; ?>
 
@@ -306,6 +306,34 @@ $countProducts = countCart($ip_add);
       <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
       <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
     </svg></div>
+  
+    <script>
+		const message = $(".alert").data("id")
+
+		if (message == 1) {
+			Swal.fire({
+				icon: 'success',
+				title: 'Product Created Successfully',
+			})
+		}else if(message == 2){
+      Swal.fire({
+				icon: 'error',
+				title: 'Product could not be created',
+			})
+    }else if(message == 5){
+      Swal.fire({
+				icon: 'success',
+				title: 'Product deleted Successfully',
+			})
+    }else if(message == 6){
+      Swal.fire({
+				icon: 'error',
+				title: 'Product could not be deleted',
+			})
+    }
+		// alert(message);
+	</script>
+
 
   <script>
     function add_to_cart(product_id) {

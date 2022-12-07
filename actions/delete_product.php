@@ -8,20 +8,11 @@
 
     if($deleted){
         echo "deleted";
-        header("Location: ../view/products.php");
-              echo "
-              <script>
-                alert('this is fun');
-                $(#success).modal('show');
-              
-              
-              </script>
-              ";
-            
+        header("Location: ../view/products.php?status=5");          
           
     }else{
         echo "failed";
-        header("Location: ../view/products.php");
+        header("Location: ../view/products.php?status=6");
     }
 
 

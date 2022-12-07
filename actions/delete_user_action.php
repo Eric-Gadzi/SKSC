@@ -8,9 +8,9 @@
 
     if($result){
         echo "success";
-        header("Location: ../view/volunteers.php");
+        header("Location: ../view/volunteers.php?status=1");
     }else{
-        echo "failed";
+        header("Location: ../view/volunteers.php?status=2");
     }
 
 

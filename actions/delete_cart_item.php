@@ -7,7 +7,9 @@ $user_ip = $_SESSION['user_ip'];
 $delete = delete_cart($product_id, $user_ip);
 
 if($delete){
-    header("location: ../view/cart.php");
+    header("location: ../view/cart.php?status=1");
+}else{
+    header("location: ../view/cart.php?status=2");
 }
 
 ?>

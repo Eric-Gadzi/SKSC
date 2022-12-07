@@ -2,8 +2,8 @@
 require_once("../functions/cart_functions.php");
 require_once("../controllers/cart_controller.php");
 
-  $ip_add = $_SESSION['user_ip'];
-  $countProducts = countCart($ip_add);
+$ip_add = $_SESSION['user_ip'];
+$countProducts = countCart($ip_add);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +37,13 @@ require_once("../controllers/cart_controller.php");
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
     <style>
         body {
             /* margin-top: 20px; */
@@ -65,33 +72,37 @@ require_once("../controllers/cart_controller.php");
         }
     </style>
 </head>
-
+<?php if (isset($_GET['status'])) : ?>
+     
+     <div class='alert' style="display: none;" aria-hidden="true" data-id="<?php echo $_GET['status']; ?>"></div>
+ 
+   <?php endif; ?>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-      <a class="navbar-brand" href="index.php">Welfare</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="oi oi-menu"></span> Menu
-      </button>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="index.php">Welfare</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
 
-      <div class="collapse navbar-collapse" id="ftco-nav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="causes.php" class="nav-link">Causes</a></li>
-          <li class="nav-item"><a href="donate.php" class="nav-link">Donate</a></li>
-          <!-- <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="causes.php" class="nav-link">Causes</a></li>
+                    <li class="nav-item"><a href="donate.php" class="nav-link">Donate</a></li>
+                    <!-- <li class="nav-item"><a href="blog.php" class="nav-link">Blog</a></li>
           <li class="nav-item"><a href="gallery.php" class="nav-link">Gallery</a></li>
           <li class="nav-item"><a href="event.php" class="nav-link">Events</a></li>
           <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li> -->
-          <li class="nav-item"><a href="volunteers.php" class="nav-link">Volunteers</a></li>
-          <li class="nav-item"><a href="products.php" class="nav-link">Products</a></li>
-          <li class="nav-item  active"><a href="cart.php" class="nav-link">Cart <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary"><?php echo $countProducts ?></span></a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+                    <li class="nav-item"><a href="volunteers.php" class="nav-link">Volunteers</a></li>
+                    <li class="nav-item"><a href="products.php" class="nav-link">Products</a></li>
+                    <li class="nav-item  active"><a href="cart.php" class="nav-link">Cart <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary"><?php echo $countProducts ?></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <!-- END nav -->
 
     <div class="hero-wrap" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
@@ -101,11 +112,11 @@ require_once("../controllers/cart_controller.php");
                 <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
                     <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.php">Home</a></span> <span>Event</span></p>
                     <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">YOUR CART</h1>
-                    
+
                 </div>
             </div>
         </div>
-        
+
     </div>
 
 
@@ -155,7 +166,9 @@ require_once("../controllers/cart_controller.php");
                             </div> -->
                             <div class="text-right mt-4">
                                 <label class="text-muted font-weight-normal m-0">Total price</label>
-                                <div class="text-large"><strong><h3>GHC <?php echo $total ?></h3></strong></div>
+                                <div class="text-large"><strong>
+                                        <h3>GHC <?php echo $total ?></h3>
+                                    </strong></div>
                             </div>
                         </div>
                     </div>
@@ -163,12 +176,12 @@ require_once("../controllers/cart_controller.php");
                     <div class="float-right">
                         <button type="button" class="btn btn-lg btn-default md-btn-flat mt-2 mr-3" onclick="window.location.href='products.php'">Back to shopping</button>
                         <button type='button' onclick="window.location.href='checkout.php'" class='btn btn-lg btn-primary mt-2'>Checkout</button>
-                       <?php 
-                            // if($_SESSION['total'] < 1){
-                            //     echo "<button type='button' onclick='window.location.href='checkout.php' class='btn btn-lg btn-primary mt-2' disabled>Checkout</button>";
-                            // }else{
-                                // echo "<button type='button' onclick='window.location.href='checkout.php' class='btn btn-lg btn-primary mt-2'>Checkout</button>";
-                            // }
+                        <?php
+                        // if($_SESSION['total'] < 1){
+                        //     echo "<button type='button' onclick='window.location.href='checkout.php' class='btn btn-lg btn-primary mt-2' disabled>Checkout</button>";
+                        // }else{
+                        // echo "<button type='button' onclick='window.location.href='checkout.php' class='btn btn-lg btn-primary mt-2'>Checkout</button>";
+                        // }
                         ?>
                     </div>
 
@@ -268,6 +281,23 @@ require_once("../controllers/cart_controller.php");
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
+    
+        <script>
+        const message = $(".alert").data("id")
+
+        if (message == 1) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Product Deleted Successfully',
+            })
+        } else if (message == 2) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Product could not be created',
+            })
+        }
+    </script>
+
 
     <script>
         function increase(product_id) {
@@ -284,13 +314,13 @@ require_once("../controllers/cart_controller.php");
 
         }
 
-        function decrease(product_id){
+        function decrease(product_id) {
             event.preventDefault();
 
             const xhttp = new XMLHttpRequest();
             xhttp.onload = function() {
                 //  alert(this.responseText);
-                
+
             }
             xhttp.open("GET", `../actions/update_cart.php?product_id=${product_id}&decrease=decrease`);
             xhttp.send();

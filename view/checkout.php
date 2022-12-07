@@ -74,7 +74,7 @@ require_once("../controllers/cart_controller.php");
         <div class="container">
             <div class="row d-md-flex">
                 <div class="col-md-6 d-flex ftco-animate">
-                    <div class="img img-2 align-self-stretch" style="background-image: url(images/bg_4.jpg);"></div>
+                    <div class="img img-2 align-self-stretch" style="background-image: url(images/cause-4.jpg);"></div>
                 </div>
                 <div class="col-md-6 volunteer pl-md-5 ftco-animate">
                     <h3 class="mb-3">Make Payment</h3>
