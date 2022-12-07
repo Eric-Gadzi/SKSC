@@ -73,5 +73,11 @@
         return $user->delete_donor($id);
     }
 
+    function delete_donor_ref_ctr($ref){
+        $user = new User;
+
+        return $user->delete_donor_ref($ref);
+    }
+
 
 ?>

@@ -12,7 +12,7 @@ $user_message = $_GET['user_message'];
 $user_contact = $_GET['user_contact'];
 $data = $_GET["reference"];
 $user_ip = $_SESSION['user_ip'];
-$invoice_no = mt_rand();
+$invoice_no = $data;
 $order_status = "pending";
 $order_date = new DateTime();
 $order_date = date_format($order_date, "Y-m-d");
@@ -42,19 +42,24 @@ if ($err) {
   echo "cURL Error #:" . $err;
 }else {
     $res = $response;
+    $amount =  $res['data']['amount'];
+    $currency = $res['data']['currency'];
+    $payment_date = date("Y-m-d");
+   
 
     // print_r($res);
     $order_id = create_order_ctr($user_ip, $invoice_no, $order_date, $order_status);
    
-    $amount =  $res['data']['amount'];
-    $currency = $res['data']['currency'];
-    $payment_date = date("Y-m-d");
+ 
     
 
     
     $paid = product_payment_ctr($user_ip,$order_id, $payment_date, $amount, $currency);
 
     if($paid){
+     
+      $donated = make_donation_ctr($user_name, $user_email, $payment_date, $amount, $data, $currency, $user_message, $user_contact);
+      
         $cartList = select_user_cart($user_ip);
         foreach($cartList as $cart){
           $moved = add_order_details_ctr($order_id, $cart['product_id'], $cart['qty']);

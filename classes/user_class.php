@@ -77,9 +77,11 @@
             return $this->db_query($sql);
         }
 
+        function delete_donor_ref($ref){
+            $sql = "SELECT * FROM `donation` WHERE `reference_no` = $ref";
 
-
-
+            return $this->db_fetch_one($sql);
+        }
     }
 
 

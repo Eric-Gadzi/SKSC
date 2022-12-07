@@ -48,10 +48,29 @@
        return $order->update_order_details($order_id, $product_id, $qty);
     }
 
+
+    function select_order_details($order_id){
+        $order = new Order;
+
+       return $order->select_order_details($order_id);
+    }
+
     function delete_order_details($order_id, $product_id){
         $order = new Order;
 
        return $order->delete_order_details($order_id, $product_id);
+    }
+
+    function all_orders_details(){
+        $order = new Order;
+
+       return $order->all_orders_details();
+    }
+
+    function update_order_status($id){
+        $order = new Order;
+
+        return $order->update_order_status($id);
     }
 
     

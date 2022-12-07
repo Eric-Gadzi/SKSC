@@ -68,7 +68,12 @@ $countProducts = countCart($ip_add);
           <li class="nav-item"><a type="button" href="#" data-toggle="modal" data-target="#modalLogin" class="nav-link btn btn-sm-primary">Admin</a></li>
           <?php
           if (isset($_SESSION['isAdmin'])) {
+            echo "<li class='nav-item'><a type='button' href='orders.php' class='nav-link btn'>Orders</a></li>";
+
+
             echo "<li class='nav-item'><a type='button' href='../settings/session_destroy.php' class='nav-link btn btn-primary'>Logout</a></li>";
+           
+
           }
           ?>
         </ul>
@@ -814,7 +819,7 @@ else{
 
 
       let handler = PaystackPop.setup({
-        key: 'pk_test_bed9ac10a9fd731dd3af495d9160b4a59b72217a', // Replace with your public key
+        key: 'pk_live_bd5356607a881f3a0d6843b75d3172b74b9675cd', // Replace with your public key
         email: user_email,
         amount: user_amount * 100, //amount.value * 100,
 

@@ -59,6 +59,22 @@
             return $this->db_query($sql);
         }
 
+        function select_order_details($order_id){
+            $sql = "SELECT * FROM orderdetails where order_id = '$order_id'";
+            return $this->db_fetch_all($sql);
+        }
+
+        function all_orders_details(){
+            $sql = "SELECT orders.order_id, donation.reference_no, products.product_id, products.product_price, products.product_title, donation.donor_name, donation.donor_email, donor_contact, orderdetails.qty, orders.order_status FROM orders,donation,orderdetails,products WHERE orders.invoice_no=donation.reference_no and orders.order_id=orderdetails.order_id and products.product_id=orderdetails.product_id";
+            return $this->db_fetch_all($sql);
+        }
+
+        function update_order_status($id){
+            $sql = "UPDATE `orders` SET `order_status`='success' WHERE order_id='$id'";
+            return $this->db_query($sql);
+        
+        }
+
         
 
     }

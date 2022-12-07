@@ -1,16 +1,17 @@
 <?php
-require_once("../functions/cart_functions.php");
+require_once("../functions/orders_function.php");
 require_once("../controllers/cart_controller.php");
 
-  $ip_add = $_SESSION['user_ip'];
-  $countProducts = countCart($ip_add);
-?>
+session_start();
 
+$ip_add = $_SESSION['user_ip'];
+$countProducts = countCart($ip_add);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Volunteers</title>
+    <title>Welfare - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -36,9 +37,48 @@ require_once("../controllers/cart_controller.php");
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css" integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+
+    <style>
+        body {
+            /* margin-top: 20px; */
+            background: #eee;
+        }
+
+        .ui-w-40 {
+            /* width: 40px !important; */
+            height: auto;
+        }
+
+        .card {
+            box-shadow: 0 1px 15px 1px rgba(52, 40, 104, .08);
+        }
+
+        .ui-product-color {
+            display: inline-block;
+            overflow: hidden;
+            margin: .144em;
+            width: .875rem;
+            height: .875rem;
+            border-radius: 10rem;
+            -webkit-box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<?php if (isset($_GET['status'])) : ?>
+     
+     <div class='alert' style="display: none;" aria-hidden="true" data-id="<?php echo $_GET['status']; ?>"></div>
+ 
+   <?php endif; ?>
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
@@ -60,7 +100,7 @@ require_once("../controllers/cart_controller.php");
           <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li> -->
                     <li class="nav-item"><a href="volunteers.php" class="nav-link">Volunteers</a></li>
                     <li class="nav-item"><a href="products.php" class="nav-link">Products</a></li>
-                    <li class="nav-item"><a href="cart.php" class="nav-link">Cart <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary"><?php echo $countProducts ?></span></a></li>
+                    <li class="nav-item  active"><a href="cart.php" class="nav-link">Cart <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill text-primary"><?php echo $countProducts ?></span></a></li>
                 </ul>
             </div>
         </div>
@@ -68,40 +108,82 @@ require_once("../controllers/cart_controller.php");
     <!-- END nav -->
 
 
-
-    <section id="donate" class="ftco-section-3 img" tabindex="1" style="background-image: url(images/bg_3.jpg);">
+    <div class="hero-wrap" style="background-image: url('images/bg_1.jpg');" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="container">
-            <div class="row d-md-flex">
-                <div class="col-md-6 d-flex ftco-animate">
-                    <div class="img img-2 align-self-stretch" style="background-image: url(images/cause-4.jpg);"></div>
-                </div>
-                <div class="col-md-6 volunteer pl-md-5 ftco-animate">
-                    <h3 class="mb-3">Make Payment</h3>
-                    <form action="#" class="volunter-form">
-                        <div class="form-group">
-                            <input id="donor_name" name="donor_name" type="text" class="form-control" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input id="donor_email" name="donor_email" type="email" class="form-control" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input id="donor_contact" name="donor_contact" type="number" class="form-control" placeholder="Your Contact" required>
-                        </div>
-                        <div class="form-group">
-                            <input id="donor_amount" name="donor_amount" type="text" class="form-control" placeholder="Amount in GHC" value="<?php echo $_SESSION['total'] ?>" readonly>
-                        </div>
-                        <div class="form-group">
-                            <textarea id="donor_message" name="" id="" cols="30" rows="3" class="form-control" placeholder="Message to SKSC"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Make Payment" onclick="payWithPaystack()" class="btn btn-white py-3 px-5">
-                        </div>
-                    </form>
+            <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
+                <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
+                    <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.php">Home</a></span> <span>Products</span></p>
+                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Orders From Patrons</h1>
                 </div>
             </div>
         </div>
+    </div>
+
+    <section class="ftco-section" >
+        <div class="container px-3 my-4 clearfix">
+            <!-- Shopping cart table -->
+           
+               <div class="">
+                    <h2>Order Table</h2>
+                </div>
+                <div class="card-body  w-100" width = "200px">
+                    <div class="table">
+                        <table class="table table-bordered ">
+                            <thead>
+                                <tr>
+                                    <!-- Set columns width -->
+                                    <th class="text-center " style="min-width: 100px;">Customer Name</th>
+                                    <th class="text-right px-4" style="width: 100px;">Email</th>
+                                    <th class="text-center  px-4" style="width: 100x;">Contact</th>
+                                    <th class="text-center  px-4" style="width: 150x;">Product Name</th>
+                                    <th class="text-right  px-4" style="width: 100px;">Product Price</th>
+                                    <th class="text-right  px-4" style="width: 100px;">Quantity Ordered</th>
+                                    <th class="text-center  px-4" style="width: 100x;">Total Amount</th>
+                                    <th class="text-right  px-4" style="width: 100px;">Order Status</th>
+                                    <th class="text-right  px-4" style="width: 100px;">Change Status</th>
+                                    <!-- <th class="text-center align-middle py-3 px-0" style="width: 40px;"><a href="#" class="shop-tooltip float-none text-light" title="" data-original-title="Clear cart"><i class="ino ion-md-trash"></i></a></th> -->
+                                </tr>
+                            </thead>
+                            <tbody id="cart">
+
+                                <?php
+                                $total = display_all_orders();
+                                $_SESSION['total'] = $total;
+                                
+                                ?>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- / Shopping cart table -->
+
+                    <div class="d-flex flex-wrap justify-content-between align-items-center pb-4">
+                        <div class="mt-4">
+                            <!-- <label class="text-muted font-weight-normal">Promocode</label>
+                            <input type="text" placeholder="ABC" class="form-control"> -->
+                        </div>
+                        <div class="d-flex">
+                            <!-- <div class="text-right mt-4 mr-5">
+                                <label class="text-muted font-weight-normal m-0">Discount</label>
+                                <div class="text-large"><strong>$20</strong></div>
+                            </div> -->
+                            <div class="text-right mt-4">
+                                <label class="text-muted font-weight-normal m-0">Total price</label>
+                                <div class="text-large"><strong>
+                                        <h3>GHC <?php echo $total ?></h3>
+                                    </strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+      
+        </div>
     </section>
+       
 
     <footer class="ftco-footer ftco-section img">
         <div class="overlay"></div>
@@ -193,90 +275,51 @@ require_once("../controllers/cart_controller.php");
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00" />
         </svg></div>
-    <script src="https://js.paystack.co/v2/inline.js" async defer></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+        <script>
+        const message = $(".alert").data("id")
+
+        if (message == 1) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Deliver Made Successfully',
+            })
+        } else if (message == 2) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Product could not be updated',
+            })
+        }
+    </script>
+
+
     <script>
-        function payWithPaystack() {
+        function increase(product_id) {
+
             event.preventDefault();
-            let user_name = document.getElementById("donor_name").value;
-            let user_email = document.getElementById("donor_email").value;
-            let user_contact = document.getElementById("donor_contact").value;
-            let user_amount = document.getElementById("donor_amount").value;
-            let user_message = document.getElementById("donor_message").value;
 
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                //  alert(this.responseText);
+              
+            }
+            xhttp.open("GET", `../actions/update_cart.php?product_id=${product_id}&increase=increase`);
+            xhttp.send();
 
-            let handler = PaystackPop.setup({
-                key: 'pk_live_bd5356607a881f3a0d6843b75d3172b74b9675cd', // Replace with your public key
-                email: user_email,
-                amount: parseInt(user_amount) * 100, //amount.value * 100,
+        }
 
-                callback: function(response) {
-               
+        function decrease(product_id) {
+            event.preventDefault();
 
-                    const xhttp = new XMLHttpRequest();
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function() {
+                //  alert(this.responseText);
 
-                    xhttp.open("GET", `../actions/payment_process.php?user_name=${user_name}&user_email=${user_email}&user_contact=${user_contact}&reference=${response.reference}&user_message=${user_message}`);
-                    xhttp.send();
-                
-                    xhttp.onload = function() {
-                        
+            }
+            xhttp.open("GET", `../actions/update_cart.php?product_id=${product_id}&decrease=decrease`);
+            xhttp.send();
 
-                        if (this.responseText == 1) {
-                            
-                            Swal.fire({
-                                icon: 'success',
-                                text: 'Payment Successful',
-                                title: 'Thank you for making this donation.',
-                                showDenyButton: false,
-                                showCancelButton: false,
-                                confirmButtonText: 'Ok',
-                                denyButtonText: `Don't save`,
-                            }).then((result) => {
-                                /* Read more about isConfirmed, isDenied below */
-                                if (result.isConfirmed) {
-                                    window.location = "index.php";
-                                } 
-                            })
-                        }else{
-                            Swal.fire({
-                                icon: 'error',
-                                text: 'Sorry Could not process payment',
-                                title: 'Thank you for making this donation.',
-                                showDenyButton: false,
-                                showCancelButton: false,
-                                confirmButtonText: 'Ok',
-                                denyButtonText: `Don't save`,
-                            }).then((result) => {
-                                /* Read more about isConfirmed, isDenied below */
-                                if (result.isConfirmed) {
-                                    window.location = "index.php";
-                                } 
-                            })
-                        }
-
-
-                    }
-
-                },
-                onClose: function() {
-                    Swal.fire({
-                                icon: 'error',
-                                text: 'Sorry Could not process payment',
-                                title: 'Thank you for making this donation.',
-                                showDenyButton: false,
-                                showCancelButton: false,
-                                confirmButtonText: 'Ok',
-                                denyButtonText: `Don't save`,
-                            }).then((result) => {
-                                /* Read more about isConfirmed, isDenied below */
-                                if (result.isConfirmed) {
-                                    window.location = "index.php";
-                                } 
-                            })
-                }
-            });
-            handler.openIframe();
-        };
+        }
     </script>
 
 
