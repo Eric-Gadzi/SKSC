@@ -270,7 +270,7 @@ $countProducts = countCart($ip_add);
     </div>
   </section>
 
-  <section class="ftco-section">
+  <!-- <section class="ftco-section">
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section ftco-animate text-center">
@@ -323,9 +323,9 @@ $countProducts = countCart($ip_add);
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
-  <section class="ftco-gallery">
+  <!-- <section class="ftco-gallery">
 
     <div class="d-md-flex">
       <a href="images/cause-2.jpg" class="gallery image-popup d-flex justify-content-center align-items-center img ftco-animate" style="background-image: url(images/cause-2.jpg);">
@@ -430,9 +430,9 @@ $countProducts = countCart($ip_add);
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
-  <section class="ftco-section bg-light">
+  <!-- <section class="ftco-section bg-light">
     <div class="container">
       <div class="row justify-content-center mb-5 pb-3">
         <div class="col-md-7 heading-section ftco-animate text-center">
@@ -493,7 +493,7 @@ $countProducts = countCart($ip_add);
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <section id="volunteer" class="ftco-section-3 img" style="background-image: url(images/bg_3.jpg);">
     <div class="overlay"></div>
