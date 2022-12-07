@@ -87,20 +87,38 @@
         <div class="container">
             <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
                 <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-                    <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Donate</span></p>
-                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Donations</h1>
+                    <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Volunteers</span></p>
+                    <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Volunteers</h1>
                 </div>
+
             </div>
+            
         </div>
     </div>
+
+    <br><br>
+    <form action="" method="get">
+        <div class="input-group w-50 mx-auto">
+          <input type="text" class="form-control mb-3 rounded" placeholder="Search volunteer" aria-label="product name" aria-describedby="button-addon2" name="volunteer_name"  title="enter only characters">
+          <button class="btn btn-primary mb-3" type="submit" id="button-addon2">
+          <span><i class="bi bi-search"></i></span>
+            search
+          </button>
+        </div>
+        
+      </form>
 
 
     <section class="ftco-section bg-light">
         <div class="container">
             <div class="row">
                 <?php 
-                
-                display_user($role);
+                if(isset($_GET['volunteer_name'])){
+                    display_search_user($role, $_GET['volunteer_name']);
+                }else{
+                    display_user($role);
+
+                }
                 
                 ?>
               
@@ -125,37 +143,47 @@
         </div>
     </section>
 
-
-    <section id="donate" class="ftco-section-3 img" tabindex="1" style="background-image: url(images/bg_3.jpg);">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row d-md-flex">
-                <div class="col-md-6 d-flex ftco-animate">
-                    <div class="img img-2 align-self-stretch" style="background-image: url(images/bg_4.jpg);"></div>
-                </div>
-                <div class="col-md-6 volunteer pl-md-5 ftco-animate">
-                    <h3 class="mb-3">Donate now</h3>
-                    <form action="#" class="volunter-form">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Your Email" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Amount in GHC" required>
-                        </div>
-                        <div class="form-group">
-                            <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="Message"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Send Message" class="btn btn-white py-3 px-5">
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <section id="volunteer" class="ftco-section-3 img" style="background-image: url(images/bg_3.jpg);">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row d-md-flex">
+        <div class="col-md-6 d-flex ftco-animate">
+          <div class="img img-2 align-self-stretch" style="background-image: url(images/bg_4.jpg);"></div>
         </div>
-    </section>
+        <div class="col-md-6 volunteer pl-md-5 ftco-animate">
+          <h3 class="mb-3">Be a volunteer</h3>
+          <form action="../actions/add_volunteer.php" method="POST" class="volunter-form" enctype="multipart/form-data">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Your Name" id="user_name" name="user_name" pattern="[A-Za-z].{1,}" title="input cannot contain numbers or special characters">
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Your Email" id="user_email" name="user_email">
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" placeholder="Your Telephone" id="user_contact" name="user_contact" pattern="(?=.*\d).{10,}" title="input cannot contain numbers or special characters" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Country" id="user_country" name="user_country"  pattern="[A-Za-z].{1,}" title="input cannot contain numbers or special characters">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="user_city" name="user_city" placeholder="City" pattern="[A-Za-z].{1,}" title="input cannot contain numbers or special characters" required>
+            </div>
+            <div class="form-group">
+              <label for="user_image" class="text-white">Profile Image</label><br>
+              <input type="file" accept="image/*" name="user_image" id="user_image" required>
+            </div>
+            <div class="form-group">
+              <textarea cols="30" rows="3" class="form-control" id="user_message" name="user_message" placeholder="Message(Why Do You Want To Join She Knows She Can)">
+            </textarea>
+            </div>
+            <div class="form-group">
+              <input type="submit" name="submit" onclick="addVolunteer()" value="Become A Volunteer" class="btn btn-white py-3 px-5" required>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 
     <footer class="ftco-footer ftco-section img">
         <div class="overlay"></div>

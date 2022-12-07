@@ -2,7 +2,13 @@
 
     require_once("../controllers/user_controller.php");
 
- 
+    function display_search_user($role, $v_name){
+        $user_list = select_search_user_ctr($role, $v_name);
+
+        foreach($user_list as $user){
+            display_a_volunteer($user['user_name'], $user['user_image'], $user['user_message'], $user['user_id'], $user['user_country'], $user['user_city'], $user['user_contact'], $user['user_email']);
+        }
+    }
 
     function display_user($role){
 

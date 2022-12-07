@@ -29,6 +29,12 @@
             return $this->db_fetch_all($sql);
         }
 
+        function select_search_user($role, $v_name){
+            $sql = "SELECT * FROM user where user_role = '$role' and user_name LIKE '%$v_name%'" ;
+
+            return $this->db_fetch_all($sql);
+        }
+
         function select_particular_user($role){
             $sql = "SELECT * FROM user where user_role = '$role'";
 

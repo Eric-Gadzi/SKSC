@@ -90,8 +90,19 @@ $countProducts = countCart($ip_add);
     <div class="container">
       <div class="row no-gutters slider-text align-items-center justify-content-center" data-scrollax-parent="true">
         <div class="col-md-7 ftco-animate text-center" data-scrollax=" properties: { translateY: '70%' }">
-          <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.html">Home</a></span> <span>Event</span></p>
+          <p class="breadcrumbs" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><span class="mr-2"><a href="index.php">Home</a></span> <span>Products</span></p>
           <h1 class="mb-3 bread" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Products From the Girls</h1>
+
+          <form action="" method="get">
+        <div class="input-group w-50 mx-auto">
+          <input type="text" class="form-control mb-3 rounded" placeholder="Search product name" aria-label="product name" aria-describedby="button-addon2" name="product_name"  title="enter only characters">
+          <button class="btn btn-primary mb-3" type="submit" id="button-addon2">
+          <span><i class="bi bi-search"></i></span>
+            search
+          </button>
+        </div>
+        
+      </form>
         </div>
       </div>
     </div>
@@ -114,16 +125,7 @@ $countProducts = countCart($ip_add);
 
 
       <h4 class="mt-4 mb-5"><strong>Buy The Best FromProduct Girls</strong></h4>
-      <form action="" method="get">
-        <div class="input-group w-50 mx-auto">
-          <input type="text" class="form-control mb-3 rounded" placeholder="Search product name" aria-label="product name" aria-describedby="button-addon2" name="product_name"  title="enter only characters">
-          <button class="btn btn-primary mb-3" type="submit" id="button-addon2">
-          <span><i class="bi bi-search"></i></span>
-            search
-          </button>
-        </div>
-        
-      </form>
+      
 
       <div class="row">
 

@@ -31,6 +31,12 @@
         return $user->select_all_user($role);
     }
 
+    function select_search_user_ctr($role, $v_name){
+        $user = new User;
+
+        return $user->select_search_user($role, $v_name);
+    }
+
     function select_one_user_ctr($user_id){
         $user = new User;
 
